@@ -808,7 +808,7 @@ export async function getServerSideProps() {
 
   if (heads.length > 0) {
     filtered = heads.filter(
-      (head) => head.id === process.env.NEXT_PUBLIC_HEAD_ID
+      (head) => head.id === process.env.NEXT_PUBLIC_CAMPAIGN_ID
     )
   }
 
