@@ -41,7 +41,6 @@ import { Footer } from "./Footer"
 export const Layout = ({ children }) => {
     const { token } = useContext(ProductContext)
 
-
     const [origin, setOrigin] = useState("http://localhost:3000")
 
     useEffect(() => {

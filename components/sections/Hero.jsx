@@ -9,7 +9,6 @@ import { ProductContext } from '../../context/ProductContext'
 export const Hero = () => {
 
     const { allData } = useContext(ProductContext)
-    console.log(allData?.image?.url)
 
     return (
         <div >
