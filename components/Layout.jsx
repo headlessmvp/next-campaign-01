@@ -39,7 +39,7 @@ import { Footer } from "./Footer"
 
 
 export const Layout = ({ children }) => {
-    const { token } = useContext(ProductContext)
+    const { token, allData } = useContext(ProductContext)
 
     const [origin, setOrigin] = useState("http://localhost:3000")
 
@@ -73,8 +73,13 @@ export const Layout = ({ children }) => {
                                 <link rel="icon" href="/favicon.ico" />
                             </Head>
 
-                            <div className="bg-white">
-
+                            <div >
+                                {/* {allData && allData?.image && <img
+                                    src={allData?.image?.url}
+                                    alt={"okay"}
+                                    className="absolute -z-0 h-full w-full object-cover object-center"
+                                />} */}
+                                {/* className={`bg-[url('https://cdn.sanity.io/images/z17lrfub/production/0a2348eb5500b7dee1776b933f83a3f654c10ac0-1920x1280.jpg')] object-cover object-center bg-cover bg-center`} */}
 
                                 <header className="relative">
                                     {/* Top navigation */}
@@ -165,7 +170,7 @@ export const Layout = ({ children }) => {
                                     </nav>
                                 </header>
 
-                                <main>
+                                <main >
                                     {children}
                                 </main>
 
