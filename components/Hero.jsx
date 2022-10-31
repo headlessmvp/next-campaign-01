@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import Link from 'next/link'
 
 // Context
-import { ProductContext } from '../../context/ProductContext'
+import { ProductContext } from '../context/ProductContext'
 
 export const Hero = () => {
 

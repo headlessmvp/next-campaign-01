@@ -8,6 +8,7 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline"
 
 // Next
 import Head from "next/head"
+import Link from "next/link"
 
 // Styles
 import styles from "../styles/Home.module.css"
@@ -34,11 +35,10 @@ import {
 
 // Components
 import { Footer } from "../components/Footer"
+import { Hero } from "../components/Hero"
 
 // Commercelayer
 import CommerceLayerSDK from "@commercelayer/sdk"
-
-// Commerce Layer
 import {
   PricesContainer,
   Price,
@@ -48,12 +48,6 @@ import {
 
 // Sanity
 import { client } from "../lib/client"
-
-// Components
-import { Hero } from "../components/sections/Hero"
-import { Favourites } from "../components/sections/Favourites"
-import { Layout } from "../components/Layout"
-import Link from "next/link"
 
 export default function Home({ data }) {
   const { setAllData, allData, setSubCategories, token } =
@@ -106,8 +100,6 @@ export default function Home({ data }) {
     fetchSKUs()
   }, [cl])
 
-  console.log("INDEX : ", skus)
-
   return (
     <CommerceLayer
       accessToken={token}
@@ -134,13 +126,6 @@ export default function Home({ data }) {
               </Head>
 
               <div>
-                {/* {allData && allData?.image && <img
-                            src={allData?.image?.url}
-                            alt={"okay"}
-                            className="absolute -z-0 h-full w-full object-cover object-center"
-                        />} */}
-                {/* className={`bg-[url('https://cdn.sanity.io/images/z17lrfub/production/0a2348eb5500b7dee1776b933f83a3f654c10ac0-1920x1280.jpg')] object-cover object-center bg-cover bg-center`} */}
-
                 <main>
                   <div
                     className={`bg-[url('https://cdn.sanity.io/images/z17lrfub/production/0a2348eb5500b7dee1776b933f83a3f654c10ac0-1920x1280.jpg')] object-cover object-center bg-cover bg-center min-h-[600px]`}
@@ -154,14 +139,17 @@ export default function Home({ data }) {
                             <div className="ml-4 flex lg:ml-0">
                               <Link href="/">
                                 <div className="flex items-center">
-                                  <img
-                                    className="h-8 w-auto cursor-pointer"
-                                    src="https://tailwindui.com/img/logos/mark.svg?color=white"
-                                    alt=""
-                                  />
+                                  {allData?.logo && (
+                                    <img
+                                      className="h-8 w-auto cursor-pointer"
+                                      src={allData?.logo?.url}
+                                      alt=""
+                                    />
+                                  )}
+
                                   <span className="ml-2 text-white text-2xl">
                                     {" "}
-                                    <strong> Commerce.js</strong> by Chec
+                                    {allData?.logoText}
                                   </span>
                                 </div>
                               </Link>
@@ -169,7 +157,7 @@ export default function Home({ data }) {
 
                             <div className="ml-auto flex items-center">
                               {/* Shopping Cart */}
-                              <Popover className="ml-4 flow-root text-sm lg:relative lg:ml-8 z-50">
+                              <Popover className="fixed right-6 flow-root text-sm lg:mr-8 z-50 drop-shadow-md">
                                 <Popover.Button className="group -m-2 flex items-center bg-blue-600 hover:bg-blue-800 rounded-full p-3">
                                   <ShoppingBagIcon
                                     className="h-6 w-6 flex-shrink-0 text-white"
@@ -248,7 +236,7 @@ export default function Home({ data }) {
                   <div className="relative">
                     <ItemContainer>
                       <section aria-labelledby="favorites-heading">
-                        <div className="mx-auto max-w-7xl py-10 px-4 sm:px-6 lg:px-8 bg-white -mt-20">
+                        <div className="mx-auto max-w-7xl py-10 px-4 sm:px-6 lg:px-8 bg-white">
                           <div className="mt-6 grid grid-cols-1 gap-y-10 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8">
                             {skus &&
                               skus?.map((sku) => (
@@ -256,7 +244,7 @@ export default function Home({ data }) {
                                   key={sku.reference}
                                   className="flex flex-col md:flex-row mt-20 max-w-[1000px] mx-auto"
                                 >
-                                  <div className="w-full overflow-hidden max-w-md mr-10 rounded-lg sm:aspect-h-1 sm:h-auto ">
+                                  <div className="w-full overflow-hidden max-w-md md:mr-10 rounded-lg sm:aspect-h-1 sm:h-auto mx-auto">
                                     <img
                                       src={sku?.image_url}
                                       alt={sku?.name}
@@ -287,15 +275,6 @@ export default function Home({ data }) {
                                 </div>
                               ))}
                           </div>
-
-                          <div className="mt-6 sm:hidden">
-                            <Link href="/favourites">
-                              <span className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
-                                ...
-                                <span aria-hidden="true"> &rarr;</span>
-                              </span>
-                            </Link>
-                          </div>
                         </div>
                       </section>
                     </ItemContainer>
@@ -316,6 +295,10 @@ export async function getServerSideProps() {
   const query = `*[_type == "campaign"]{
     id,
     name, 
+    logoText,
+    logo{
+      'url': asset->url
+    },
     headline,
     subHeading, 
     image{
