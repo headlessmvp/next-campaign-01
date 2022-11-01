@@ -163,8 +163,8 @@ export default function Home({ data }) {
 
                             <div className="ml-auto flex overflow-auto items-center">
                               {/* Shopping Cart */}
-                              <Popover className="fixed right-6 flow-root text-sm lg:mr-8 z-50 drop-shadow-md">
-                                <Popover.Button className="group -m-2 flex items-center bg-blue-600 hover:bg-blue-800 rounded-full p-3">
+                              <Popover className="fixed right-6 flow-root text-sm lg:mr-8 drop-shadow-md">
+                                <Popover.Button className="group -m-2 z-50 flex items-center bg-blue-600 hover:bg-blue-800 rounded-full p-3">
                                   <ShoppingBagIcon
                                     className="h-6 w-6 flex-shrink-0 text-white"
                                     aria-hidden="true"
@@ -185,7 +185,8 @@ export default function Home({ data }) {
                                   leaveFrom="opacity-100"
                                   leaveTo="opacity-0"
                                 >
-                                  <Popover.Panel className="absolute max-h-[86vh] overflow-auto right-0 min-w-[300px] top-16 mt-px bg-white pb-6 shadow-lg sm:px-2 lg:top-full lg:left-auto lg:mt-3 lg:-mr-1.5 lg:w-80 lg:rounded-lg lg:ring-1 lg:ring-black lg:ring-opacity-5">
+                                  {/* <Popover.Panel className="absolute max-h-[86vh] overflow-auto right-0 min-w-[300px] top-16 mt-px bg-white pb-6 shadow-lg sm:px-2 lg:top-full lg:left-auto lg:mt-3 lg:-mr-1.5 lg:w-80 lg:rounded-lg lg:ring-1 lg:ring-black lg:ring-opacity-5"> */}
+                                  <Popover.Panel className=" w-screen h-screen sm:h-auto absolute -z-30 -top-12   sm:max-h-[80vh] sm:overflow-auto sm:right-0 sm:min-w-[300px] sm:top-16 sm:mt-px  sm:pb-6 sm:shadow-lg sm:px-2  bg-white -right-9 lg:top-full lg:left-auto lg:mt-3 sm:-mr-1.5 sm:w-80 sm:rounded-lg sm:ring-1 sm:ring-black sm:ring-opacity-5">
                                     <h2 className="sr-only">Shopping Cart</h2>
 
                                     <div className="container">
@@ -196,10 +197,10 @@ export default function Home({ data }) {
                                         }}
                                       >
                                         <div style={{ height: "100%" }}></div>
-                                        <div className="mx-auto max-w-2xl px-4">
+                                        <div className="mx-auto max-w-2xl px-4  h-screen sm:h-auto overflow-auto flex flex-col justify-between sm:justify-start  py-10 sm:py-0">
                                           <ul
                                             role="list"
-                                            className="divide-y divide-gray-200"
+                                            className="divide-y divide-gray-200 max-h-[80vh] sm:max-h-[60vh] overflow-auto  "
                                           >
                                             <LineItemsContainer>
                                               <LineItem>
@@ -224,17 +225,18 @@ export default function Home({ data }) {
                                               </LineItem>
                                             </LineItemsContainer>
                                           </ul>
-
-                                          <p className="text-base mt-4">
-                                            Total:{" "}
-                                            <LineItemsContainer>
-                                              <TotalAmount className="text-base" />
-                                            </LineItemsContainer>
-                                          </p>
-                                          <CheckoutLink
-                                            type="submit"
-                                            className="w-full rounded-md border border-transparent bg-indigo-600 mt-6 py-2 px-4 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                                          />
+                                          <div className=" mt-auto ">
+                                            <p className="text-base mt-4">
+                                              Total:{" "}
+                                              <LineItemsContainer>
+                                                <TotalAmount className="text-base" />
+                                              </LineItemsContainer>
+                                            </p>
+                                            <CheckoutLink
+                                              type="submit"
+                                              className="w-full rounded-md border border-transparent  bg-indigo-600 mt-6 py-2 px-4 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                                            />
+                                          </div>
                                         </div>
                                         {"   "}
                                       </div>
