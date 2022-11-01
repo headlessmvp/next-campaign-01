@@ -50,6 +50,7 @@ import {
 import { client } from "../lib/client"
 
 export default function Home({ data }) {
+  const [wiggle, setWiggle] = useState(false)
   const { setAllData, allData, setSubCategories, token } =
     useContext(ProductContext)
   const [cl, setCl] = useState()
@@ -60,13 +61,6 @@ export default function Home({ data }) {
   useEffect(() => {
     setOrigin(location.origin)
   }, [])
-
-  // Handlers
-  const removeItem = async () => {
-    await fetch(
-      `https://${process.env.NEXT_PUBLIC_CL_DOMAIN}.commercelayer.io/api/line_items/:id`
-    )
-  }
 
   const fetchSKUs = async () => {
     if (token) {
@@ -164,7 +158,15 @@ export default function Home({ data }) {
                             <div className="ml-auto flex overflow-auto items-center">
                               {/* Shopping Cart */}
                               <Popover className="fixed right-6 flow-root text-sm lg:mr-8 drop-shadow-md">
-                                <Popover.Button className="group -m-2 z-50 flex items-center bg-blue-600 hover:bg-blue-800 rounded-full p-3">
+                                <Popover.Button
+                                  className={`${
+                                    wiggle && "animate-wiggle"
+                                  } group -m-2 z-50 flex items-center duration-100 bg-blue-600 hover:bg-blue-800 rounded-full p-3`}
+                                  onClick={() => {
+                                    setWiggle(true)
+                                  }}
+                                  onAnimationEnd={() => setWiggle(false)}
+                                >
                                   <ShoppingBagIcon
                                     className="h-6 w-6 flex-shrink-0 text-white"
                                     aria-hidden="true"
@@ -219,7 +221,12 @@ export default function Home({ data }) {
                                                     />
                                                     {/* <Errors resource="lineItem" field="quantity" /> */}
                                                     <LineItemAmount />
-                                                    <LineItemRemoveLink className="text-red-400 cursor-pointer text-xs block" />
+                                                    <LineItemRemoveLink
+                                                      className="text-red-400 cursor-pointer text-xs block"
+                                                      onClickCapture={() => {
+                                                        setWiggle(true)
+                                                      }}
+                                                    />
                                                   </div>
                                                 </div>
                                               </LineItem>
@@ -289,13 +296,10 @@ export default function Home({ data }) {
                                       label={"Add to cart"}
                                       skuCode={sku?.code}
                                       className="mt-2 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
-                                    />{" "}
-                                    <button
-                                      className="mt-2 flex w-full items-center justify-center rounded-md border border-transparent bg-gray-600 py-3 px-8 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 cursor-pointer"
-                                      onClick={() => removeItem(sku?.id)}
-                                    >
-                                      Remove
-                                    </button>
+                                      onClickCapture={() => {
+                                        setWiggle(true)
+                                      }}
+                                    />
                                   </div>
                                 </div>
                               ))}
