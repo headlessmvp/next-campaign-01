@@ -188,7 +188,7 @@ export default function Home({ data }) {
                                   leaveTo="opacity-0"
                                 >
                                   {/* <Popover.Panel className="absolute max-h-[86vh] overflow-auto right-0 min-w-[300px] top-16 mt-px bg-white pb-6 shadow-lg sm:px-2 lg:top-full lg:left-auto lg:mt-3 lg:-mr-1.5 lg:w-80 lg:rounded-lg lg:ring-1 lg:ring-black lg:ring-opacity-5"> */}
-                                  <Popover.Panel className=" w-screen h-screen sm:h-auto absolute -z-30 -top-12   sm:max-h-[80vh] sm:overflow-auto sm:right-0 sm:min-w-[300px] sm:top-16 sm:mt-px  sm:pb-6 sm:shadow-lg sm:px-2  bg-white -right-9 lg:top-full lg:left-auto lg:mt-3 sm:-mr-1.5 sm:w-80 sm:rounded-lg sm:ring-1 sm:ring-black sm:ring-opacity-5">
+                                  <Popover.Panel className=" w-screen h-screen sm:h-auto absolute -z-30 -top-12 bg-white -right-6  sm:max-h-[80vh] sm:overflow-auto sm:right-0 sm:min-w-[300px] sm:top-16 sm:mt-px  sm:pb-6 sm:shadow-lg sm:px-2   lg:top-full lg:left-auto lg:mt-3 sm:-mr-1.5 sm:w-80 sm:rounded-lg sm:ring-1 sm:ring-black sm:ring-opacity-5">
                                     <h2 className="sr-only">Shopping Cart</h2>
 
                                     <div className="container">
