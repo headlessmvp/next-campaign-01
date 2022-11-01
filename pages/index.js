@@ -62,6 +62,21 @@ export default function Home({ data }) {
   }, [])
 
   // Handlers
+  const removeItem = async (id) => {
+    console.log("ID", id)
+    const resp = await fetch(
+      `https://headless.commercelayer.io/api/line_items/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: `application/vnd.api+json`,
+        },
+      }
+    )
+    console.log("RESPONSE: ", resp)
+  }
+
   const fetchSKUs = async () => {
     if (token) {
       // Fetch Commercelayer SKUs
@@ -99,7 +114,7 @@ export default function Home({ data }) {
   useEffect(() => {
     fetchSKUs()
   }, [cl])
-
+  console.log(skus)
   return (
     <CommerceLayer
       accessToken={token}
@@ -281,7 +296,13 @@ export default function Home({ data }) {
                                       label={"Add to cart"}
                                       skuCode={sku?.code}
                                       className="mt-2 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
-                                    />
+                                    />{" "}
+                                    <button
+                                      className="mt-2 flex w-full items-center justify-center rounded-md border border-transparent bg-gray-600 py-3 px-8 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 cursor-pointer"
+                                      onClick={(event) => removeItem(sku?.id)}
+                                    >
+                                      Remove
+                                    </button>
                                   </div>
                                 </div>
                               ))}
