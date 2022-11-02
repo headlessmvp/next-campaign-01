@@ -206,7 +206,7 @@ export default function Home({ data }) {
                                           >
                                             <LineItemsContainer>
                                               <LineItem>
-                                                <div className="flex items-center py-6">
+                                                <div className="flex items-center py-6 px-4 sm:px-0">
                                                   <LineItemImage
                                                     className="h-16 w-16 flex-none rounded-md border border-gray-200"
                                                     width={50}
@@ -233,15 +233,15 @@ export default function Home({ data }) {
                                             </LineItemsContainer>
                                           </ul>
                                           <div className=" mt-auto ">
-                                            <p className="text-base mt-4">
+                                            <p className="text-xl sm:text-base mb-4 sm:mb-0 sm:mt-4 px-2 sm:px-0">
                                               Total:{" "}
                                               <LineItemsContainer>
-                                                <TotalAmount className="text-base" />
+                                                <TotalAmount className="text-xl sm:text-base font-medium" />
                                               </LineItemsContainer>
                                             </p>
                                             <CheckoutLink
                                               type="submit"
-                                              className="w-full rounded-md border border-transparent  bg-indigo-600 mt-6 py-2 px-4 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                                              className="w-full sm:rounded-md border border-transparent absolute bottom-0 left-0 sm:relative  bg-indigo-600 mt-6 py-3 sm:py-2 px-4 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                                             />
                                           </div>
                                         </div>
